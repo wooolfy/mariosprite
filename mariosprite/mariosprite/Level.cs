@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Media;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace RPC
+namespace GayMarioGame
 {
 
     //xbox has screen resolution of 800 x 480

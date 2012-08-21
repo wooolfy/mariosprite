@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-namespace RPC
+namespace GayMarioGame
 {
-    public class AnimatedSprite
+    public class Player
     {
         // Textures
         public Texture2D TextureRight;       

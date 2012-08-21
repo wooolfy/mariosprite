@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace RPC
+namespace GayMarioGame
 {
-    class Enemy : AnimatedSprite
+    class Enemy : Player
     {
         private bool alive = true;
         float elapsedMilliseconds = 0;
@@ -77,7 +77,7 @@ namespace RPC
             }
         }
 
-        public void kill(AnimatedSprite player)
+        public void kill(Player player)
         {
             //kill player, restart level
             alive = false;

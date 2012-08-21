@@ -9,18 +9,18 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace RPC
+namespace GayMarioGame
 {
     /// <summary>
     /// Dies ist der Haupttyp für Ihr Spiel
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class Game : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatchMario;
         SpriteBatch spriteBatchTurtleShell;
         SpriteBatch spriteBatchSplash;
-        AnimatedSprite mario;
+        Player mario;
         Menu menu;
         //Enemy shell;
         //bool direction;
@@ -49,7 +49,7 @@ namespace RPC
         }
         GameState gameState;
 
-        public Game1()
+        public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -98,7 +98,7 @@ namespace RPC
             menu = new Menu(this.Content, spriteBatchMario, graphics);
 
             // TODO: Verwenden Sie this.Content, um Ihren Spiel-Inhalt hier zu laden
-            mario = new AnimatedSprite();
+            mario = new Player();
             mario.LoadGraphic(1, 3, 60, 35, 8);
             mario.LoadGraphicRight(Content.Load<Texture2D>(@"marioright"));
             mario.LoadGraphicLeft(Content.Load<Texture2D>(@"marioleft"));
@@ -195,7 +195,7 @@ namespace RPC
                         {
                             if (Math.Abs(tile.posy - mario.getPosy()) >= Math.Abs(tile.posx - mario.getPosx()))
                             {
-                                if (tile.posy > mario.getPosy())
+                                if (tile.posy >= mario.getPosy())
                                 {
                                     mario.y = new List<int>();
                                     mario.setPosy(tile.posy - 33);
@@ -211,9 +211,9 @@ namespace RPC
                                     break;
                                 }
                             }
-                            else if (Math.Abs(tile.posy - mario.getPosy()) <= Math.Abs(tile.posx - mario.getPosx()))
+                            else if (Math.Abs(tile.posy - mario.getPosy()) < Math.Abs(tile.posx - mario.getPosx()))
                             {
-                                if (tile.posx > mario.getPosx())
+                                if (tile.posx >= mario.getPosx())
                                 {
                                     mario.x = new List<int>();
                                     mario.setPosx(tile.posx - 33);
