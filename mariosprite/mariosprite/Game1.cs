@@ -34,6 +34,7 @@ namespace RPC
         bool falling = false;
         double lastupdate;
         double gametime;
+        double elapsed = 0;
         Level level;
         enum GameState
         {
@@ -52,11 +53,12 @@ namespace RPC
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            //#if WINDOWS
-            //graphics.PreferredBackBufferWidth = 640;
-            //graphics.PreferredBackBufferHeight = 480;
+#if WINDOWS
+            graphics.PreferredBackBufferWidth = 640;
+            graphics.PreferredBackBufferHeight = 480;
+
+#endif
             //graphics.ToggleFullScreen();
-            //#endif
         }
 
         /// <summary>
@@ -149,18 +151,22 @@ namespace RPC
 
                 case GameState.MainMenu:
 
-                    
-                    if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Up))
+                    if (Math.Abs(gameTime.TotalGameTime.Milliseconds - elapsed) > 400)
                     {
-                        menu.Up();
-                    }
-                    else if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Down))
-                    {
-                        menu.Down();
-                    }
-                    else if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).Buttons.X == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter))
-                    {
-                        gameState = GameState.InGame;
+                        if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Up))
+                        {
+                            menu.Up();
+                            elapsed = gameTime.TotalGameTime.Milliseconds;
+                        }
+                        else if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Down))
+                        {
+                            menu.Down();
+                            elapsed = gameTime.TotalGameTime.Milliseconds;
+                        }
+                        else if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).Buttons.X == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter))
+                        {
+                            gameState = GameState.InGame;
+                        }
                     }
                     
                     break;
@@ -169,8 +175,12 @@ namespace RPC
 
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
-                        StartOver();
-                        RemoveSplashScreen(spriteBatchMario);
+                        if (Math.Abs(gameTime.TotalGameTime.Milliseconds - elapsed) > 280)
+                        {
+                            StartOver();
+                            RemoveSplashScreen(spriteBatchMario);
+                            elapsed = gameTime.TotalGameTime.Milliseconds;
+                        }
                     }
                     break;
 
@@ -237,15 +247,20 @@ namespace RPC
                         }
                     }
                     // Ermöglicht ein Beenden des Spiels
-
+                    if (Math.Abs(gameTime.TotalGameTime.Milliseconds - elapsed) > 280)
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    {
+                        elapsed = gameTime.TotalGameTime.Milliseconds;
                         if (gameState == GameState.InGame)
                         {
                             gameState = GameState.InGameMenu;
-                        }else {
+                        }
+                        else
+                        {
                             gameState = GameState.MainMenu;
                         }
-                        
+                    }    
+
                     if (!gamepaused)
                     {
 
@@ -378,9 +393,7 @@ namespace RPC
 
         public void RemoveSplashScreen(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Dispose();
             gameState = GameState.InGame;
-            //GraphicsDevice.Reset();
         }
 
 
