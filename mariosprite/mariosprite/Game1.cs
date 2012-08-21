@@ -21,6 +21,7 @@ namespace RPC
         SpriteBatch spriteBatchTurtleShell;
         SpriteBatch spriteBatchSplash;
         AnimatedSprite mario;
+        Menu menu;
         //Enemy shell;
         //bool direction;
         //bool directionchange;
@@ -51,11 +52,11 @@ namespace RPC
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            #if WINDOWS
-            graphics.PreferredBackBufferWidth = 640;
-            graphics.PreferredBackBufferHeight = 480;
-            graphics.ToggleFullScreen();
-            #endif
+            //#if WINDOWS
+            //graphics.PreferredBackBufferWidth = 640;
+            //graphics.PreferredBackBufferHeight = 480;
+            //graphics.ToggleFullScreen();
+            //#endif
         }
 
         /// <summary>
@@ -79,7 +80,6 @@ namespace RPC
         protected override void LoadContent()
         {
             this.gameState = GameState.Load;
-
             //TRIAL MODE?
             Guide.SimulateTrialMode = true;
 
@@ -91,6 +91,9 @@ namespace RPC
             spriteBatchMario = new SpriteBatch(GraphicsDevice);
             spriteBatchTurtleShell = new SpriteBatch(GraphicsDevice);
             spriteBatchSplash = new SpriteBatch(GraphicsDevice);
+
+            //Menü
+            menu = new Menu(this.Content, spriteBatchMario, graphics);
 
             // TODO: Verwenden Sie this.Content, um Ihren Spiel-Inhalt hier zu laden
             mario = new AnimatedSprite();
@@ -145,7 +148,21 @@ namespace RPC
                     break;
 
                 case GameState.MainMenu:
-                    gameState = GameState.InGame;
+
+                    
+                    if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Up))
+                    {
+
+                    }
+                    else if (GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Down))
+                    {
+
+                    }
+                    else if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || GamePad.GetState(PlayerIndex.One).Buttons.X == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter))
+                    {
+                        gameState = GameState.InGame;
+                    }
+                    
                     break;
 
                 case GameState.InGameMenu:
@@ -222,8 +239,8 @@ namespace RPC
                     }
                     // Ermöglicht ein Beenden des Spiels
 
-                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                        this.Exit();
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                        gameState = GameState.MainMenu;
                     if (!gamepaused)
                     {
 
@@ -398,12 +415,18 @@ namespace RPC
 
             //Draw mario
             spriteBatchMario.Begin();
-            level.drawMap(spriteBatchMario);
-            mario.Draw(spriteBatchMario, new Vector2(mario.getPosx(), mario.getPosy()),Color.White);
+            switch (gameState)
+            {
+                case GameState.InGame:
+                    level.drawMap(spriteBatchMario);
+                    mario.Draw(spriteBatchMario, new Vector2(mario.getPosx(), mario.getPosy()), Color.White);
+                    break;
 
+                case GameState.MainMenu:
+                    menu.Draw(gameTime);
 
-          
-            
+                    break;
+            }
 
             spriteBatchMario.End();
 
