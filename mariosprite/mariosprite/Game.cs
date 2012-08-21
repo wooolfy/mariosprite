@@ -193,22 +193,22 @@ namespace GayMarioGame
                     {
                         if (mario.Collideswith(tile.tilePosRect))
                         {
-                            if (Math.Abs(tile.posy - mario.getPosy()) >= Math.Abs(tile.posx - mario.getPosx()))
+                            if (Math.Abs(tile.posy - mario.getPosy()) > Math.Abs(tile.posx - mario.getPosx()))
                             {
                                 if (tile.posy >= mario.getPosy())
                                 {
                                     mario.y = new List<int>();
-                                    mario.setPosy(tile.posy - 33);
+                                    mario.setPosy(tile.posy - tile.tileheight);
                                     nocollision = false;
                                     falling = false;
-                                    break;
+                                   
                                 }
                                 else if (tile.posy < mario.getPosy())
                                 {
                                     mario.y = new List<int>();
-                                    mario.setPosy(tile.posy + 33);
+                                    mario.setPosy(tile.posy + tile.tileheight);
                                     nocollision = false;
-                                    break;
+                                   
                                 }
                             }
                             else if (Math.Abs(tile.posy - mario.getPosy()) < Math.Abs(tile.posx - mario.getPosx()))
@@ -216,18 +216,20 @@ namespace GayMarioGame
                                 if (tile.posx >= mario.getPosx())
                                 {
                                     mario.x = new List<int>();
-                                    mario.setPosx(tile.posx - 33);
+                                    mario.setPosx(tile.posx - tile.tilewidth );
                                     nocollision = false;
-                                    break;
+                                   
                                 }
                                 else if (tile.posx < mario.getPosx())
                                 {
                                     mario.x = new List<int>();
-                                    mario.setPosx(tile.posx + 33);
+                                    mario.setPosx(tile.posx + tile.tilewidth );
                                     nocollision = false;
-                                    break;
+                                   
                                 }
                             }
+                            if (!nocollision)
+                                break;
                     
 
                         }

@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rock Paper Scissors Reloaded", "mariosprite\mariosprite\Rock Paper Scissors Reloaded.csproj", "{86D190E2-6A18-425D-9A78-745B68D20814}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gay Mario Game", "mariosprite\mariosprite\Gay Mario Game.csproj", "{86D190E2-6A18-425D-9A78-745B68D20814}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mariospriteContent", "mariosprite\mariospriteContent\mariospriteContent.contentproj", "{B5106A12-3DBD-430D-963C-C1A0E47D6371}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSProcessorLib", "PSProcessorLib\PSProcessorLib.csproj", "{0E951EA3-10F3-4BE5-99AC-25E467998565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows Kopie von Rock Paper Scissors Reloaded", "mariosprite\mariosprite\Windows Kopie von Rock Paper Scissors Reloaded.csproj", "{9CC1BA0C-BEDC-4099-B31F-998FBE15B24B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Windows Gay Mario Game", "mariosprite\mariosprite\Windows Gay Mario Game.csproj", "{9CC1BA0C-BEDC-4099-B31F-998FBE15B24B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

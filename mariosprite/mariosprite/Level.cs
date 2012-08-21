@@ -108,9 +108,13 @@ namespace GayMarioGame
         public Rectangle rectangleInPicture;
         public Rectangle tilePosRect;
         bool visible;
+        public int tilewidth;
+        public int tileheight;
 
         public Tile(int posx, int posy, int mapwidth, int mapheight, int tileint,int tilewidth, int tileheight, bool visible)
         {
+            this.tileheight = tileheight;
+            this.tilewidth = tilewidth;
             int z=0;
             this.posx = posx * 32;
             this.posy = posy * 32;
