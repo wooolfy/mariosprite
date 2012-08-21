@@ -167,11 +167,10 @@ namespace RPC
 
                 case GameState.InGameMenu:
 
-                    ShowSplashScreen(spriteBatchSplash, Content.Load<Texture2D>(@"splashscreen"));
-                    if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed)
+                    if (GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     {
                         StartOver();
-                        RemoveSplashScreen(spriteBatchSplash);
+                        RemoveSplashScreen(spriteBatchMario);
                     }
                     break;
 
@@ -240,7 +239,13 @@ namespace RPC
                     // Ermöglicht ein Beenden des Spiels
 
                     if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                        gameState = GameState.MainMenu;
+                        if (gameState == GameState.InGame)
+                        {
+                            gameState = GameState.InGameMenu;
+                        }else {
+                            gameState = GameState.MainMenu;
+                        }
+                        
                     if (!gamepaused)
                     {
 
@@ -368,20 +373,14 @@ namespace RPC
 
         public void ShowSplashScreen(SpriteBatch spriteBatch, Texture2D splashScreen)
         {
-            spriteBatch.Begin();
-
-            spriteBatch.Draw(splashScreen, new Vector2(0, 0), Color.Black);
-
-            spriteBatch.End();
-
-            GraphicsDevice.Present();
-
+            spriteBatch.Draw(splashScreen, new Vector2(0, 0), Color.White);
         }
 
         public void RemoveSplashScreen(SpriteBatch spriteBatch)
         {
-            spriteBatch.Dispose();
-            GraphicsDevice.Reset();
+            //spriteBatch.Dispose();
+            gameState = GameState.InGame;
+            //GraphicsDevice.Reset();
         }
 
 
@@ -421,14 +420,15 @@ namespace RPC
                     level.drawMap(spriteBatchMario);
                     mario.Draw(spriteBatchMario, new Vector2(mario.getPosx(), mario.getPosy()), Color.White);
                     break;
-
                 case GameState.MainMenu:
                     menu.Draw(gameTime);
-
+                    break;
+                case GameState.InGameMenu:             
+                    ShowSplashScreen(spriteBatchMario, Content.Load<Texture2D>(@"splashscreen"));
                     break;
             }
-
             spriteBatchMario.End();
+            
 
             //Remove elements of list for movement of character
             //mario.x.RemoveAt(0);
