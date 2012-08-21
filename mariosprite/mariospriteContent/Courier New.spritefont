@@ -11,13 +11,13 @@ sind.
     <!--
     Ändern Sie diesen String, um die Schriftart, die importiert wird, zu ändern.
     -->
-    <FontName>Segoe UI Mono</FontName>
+    <FontName>Courier New</FontName>
 
     <!--
     Größe ist ein Float-Wert, der in Punkten gemessen wird. Ändern Sie diesen Wert, um
     die Größe der Schriftart zu ändern.
     -->
-    <Size>14</Size>
+    <Size>18</Size>
 
     <!--
     Zeichenabstand ist ein Float-Wert, der in Pixel gemessen wird. Ändern Sie diesen Wert, um

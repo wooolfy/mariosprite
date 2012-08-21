@@ -43,7 +43,7 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Xna.Framework.Game" />
     <Reference Include="Microsoft.Xna.Framework.Graphics" />
     <Reference Include="Microsoft.Xna.Framework.GamerServices" />
@@ -53,9 +53,7 @@
     <Reference Include="Microsoft.Xna.Framework.Net" />
     <Reference Include="Microsoft.Xna.Framework.Storage" />
     <Reference Include="mscorlib" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\Libraries\oldmscore\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Windows">
       <HintPath>..\..\..\Libraries\oldmscore\System.Windows.dll</HintPath>
@@ -67,12 +65,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimatedSprite.cs" />
+    <Compile Include="Camera2D.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Scene2DNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
